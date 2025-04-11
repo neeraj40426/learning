@@ -1,0 +1,109 @@
+ What is DDL?
+DDL (Data Definition Language) is a category of SQL commands used to define, create, and manage database structures like tables, schemas, and indexes. DDL commands change the structure of a database — not the data inside it.
+
+1. CREATE
+Purpose: To create a new database object (like a table, view, or database).
+Example:
+CREATE TABLE Students (ID INT,Name VARCHAR(50),Age INT);
+Output:
+>show tables;
+Empty set (0.00 sec)
+>CREATE TABLE Students (ID INT,Name VARCHAR(50),Age INT);
+Query OK, 0 rows affected (0.02 sec)
+>show tables;
++----------------+
+| Tables_in_mydb |
++----------------+
+| students       |
++----------------+
+1 row in set (0.00 sec)
+
+
+2. ALTER
+Purpose: To modify an existing database object (e.g., add, delete, or change a column).
+Example:
+ALTER TABLE Students ADD Email VARCHAR(100);
+Output:
+> desc students;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| ID    | int         | YES  |     | NULL    |       |
+| Name  | varchar(50) | YES  |     | NULL    |       |
+| Age   | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+l> ALTER TABLE Students ADD Email VARCHAR(100);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+> desc students;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| ID    | int          | YES  |     | NULL    |       |
+| Name  | varchar(50)  | YES  |     | NULL    |       |
+| Age   | int          | YES  |     | NULL    |       |
+| Email | varchar(100) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+
+3. DROP
+Purpose: To delete a database object completely (like a table or database).
+Example:
+DROP TABLE Students;
+Output:
+>show tables;
++----------------+
+| Tables_in_mydb |
++----------------+
+| students       |
++----------------+
+>DROP TABLE Students;
+Query OK, 0 rows affected (0.05 sec)
+>show tables;
+Empty set (0.00 sec)
+
+4. TRUNCATE
+Purpose: To remove all records from a table quickly without logging individual row deletions. The table structure remains.
+Example:
+TRUNCATE TABLE Students;
+Output:
+> select * from learners;
++------+------+------+-----------------+
+| ID   | Name | Age  | Email           |
++------+------+------+-----------------+
+|    1 | Raj  |   19 | raj37@gmail.com |
++------+------+------+-----------------+
+1 row in set (0.01 sec)
+>TRUNCATE TABLE learners;
+Query OK, 0 rows affected (0.05 sec)
+> select * from learners;
+Empty set (0.00 sec)
+
+5. RENAME
+Purpose: To change the name of a table or a column (in some databases like Oracle or MySQL).
+Example:
+RENAME TABLE Students TO Learners;
+Output:
+>show tables;
++----------------+
+| Tables_in_mydb |
++----------------+
+| students       |
++----------------+
+1 row in set (0.00 sec)
+> RENAME TABLE Students TO Learners;
+Query OK, 0 rows affected (0.03 sec)
+> show tables;
++----------------+
+| Tables_in_mydb |
++----------------+
+| learners       |
++----------------+
+1 row in set (0.00 sec)
+> select * from learners;
+Empty set (0.00 sec)
+
+
+

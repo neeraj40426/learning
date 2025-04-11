@@ -1,0 +1,25 @@
+1. SELECT
+Purpose: To retrieve data from one or more tables in a database.
+Example 1: Basic Selection
+SELECT * FROM Students;
+Output:
+> SELECT * FROM Students;
++----+--------+-----+--------------------+
+| ID | Name   | Age | Email              |
++----+--------+-----+--------------------+
+|  1 | Raj    |  20 | raj37@gmail.com    |
+|  2 | Priya  |  21 | priya@mail.com     |
++----+--------+-----+--------------------+
+2 rows in set (0.00 sec)
+
+Example 2: Specific Columns
+SELECT Name, Age FROM Students;
+Output:
+> SELECT Name, Age FROM Students;
++--------+-----+
+| Name   | Age |
++--------+-----+
+| Raj    |  20 |
+| Priya  |  21 |
++--------+-----+
+2 rows in set (0.00 sec)

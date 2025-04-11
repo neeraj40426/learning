@@ -1,0 +1,66 @@
+SQL Set Operators
+Set operators allow combining results from two or more SELECT statements. The main operators are:
+1.UNION
+2.INTERSECT
+3.MINUS 
+
+->Table ListA:-
++--------+
+| Name   |
++--------+
+| Raj    |
+| Simran |
+| Aman   |
+| Pooja  |
++--------+
+->Table ListB:-
++--------+
+| Name   |
++--------+
+| Simran |
+| Pooja  |
+| Ravi   |
++--------+
+
+1. UNION
+Purpose: Combines results from both queries and removes duplicates.
+Query:
+SELECT Name FROM ListA
+UNION
+SELECT Name FROM ListB;
+Output:
++--------+
+| Name   |
++--------+
+| Raj    |
+| Simran |
+| Aman   |
+| Pooja  |
+| Ravi   |
++--------+
+
+2.INTERSECT
+Query:
+SELECT A.Name
+FROM ListA A
+INNER JOIN ListB B ON A.Name = B.Name;
+Output:
++--------+
+| Name   |
++--------+
+| Simran |
+| Pooja  |
++--------+
+
+3.MINUS
+Query:
+SELECT Name
+FROM ListA
+WHERE Name NOT IN (SELECT Name FROM ListB);
+Output:
++--------+
+| Name   |
++--------+
+| Raj    |
+| Aman   |
++--------+

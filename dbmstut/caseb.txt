@@ -1,0 +1,66 @@
+->Master Table
++--------+---------+----------+----------+----------+
+| RollNo | Name    | Sub1Mark | Sub2Mark | Sub3Mark |
++--------+---------+----------+----------+----------+
+|      1 | Raj     |       75 |       82 |       79 |
+|      2 | Priya   |       88 |       91 |         A|
+|      3 | Karan   |       32 |       45 |       50 |
+|      4 | Neha    |       65 |       70 |       69 |
+|      5 | Rohan   |       88 |       92 |       89 |
+|      6 | Simran  |       50 |       61 |       59 |
+|      7 | Aman    |         A|       74 |       80 |
+|      8 | Sneha   |       66 |       48 |       35 |
+|      9 | Manav   |       28 |       40 |       30 |
+|     10 | Ishita  |       77 |       81 |       74 |
+|     11 | Yash    |       91 |       89 |       94 |
+|     12 | Anjali  |       40 |       50 |       52 |
+|     13 | Arpita  |       60 |       59 |       58 |
+|     14 | Dev     |       55 |       62 |       49 |
+|     15 | Tanya   |       33 |       32 |       35 |
+|     16 | Rahul   |       44 |         A|       67 |
+|     17 | Arjun   |       92 |       90 |       95 |
+|     18 | Kavya   |       64 |       72 |       71 |
+|     19 | Mehul   |       69 |       38 |       45 |
+|     20 | Isha    |       90 |       89 |         A|
++--------+---------+----------+----------+----------+
+*Question 1:*
+TOP THREE STUDENTS 
+CONDIIONS:
+->No subject is "A"(not absent)
+->No subject has marks < 33 (not fail)
+->Total % > 60%
+
+*Query 1:*
+SELECT RollNo, Name, Sub1Mark, Sub2Mark, Sub3Mark, (CAST(Sub1Mark AS UNSIGNED)+CAST(Sub2Mark AS UNSIGNED)+CAST(Sub3Mark AS UNSIGNED)) AS Total, ROUND((CAST(Sub1Mark AS UNSIGNED)+CAST(Sub2Mark AS UNSIGNED)+CAST(Sub3Mark AS UNSIGNED))/3,2) AS Percentage FROM Students WHERE Sub1Mark!='A' AND Sub2Mark!='A' AND Sub3Mark!='A' AND CAST(Sub1Mark AS UNSIGNED)>=33 AND CAST(Sub2Mark AS UNSIGNED)>=33 AND CAST(Sub3Mark AS UNSIGNED)>=33 AND ((CAST(Sub1Mark AS UNSIGNED)+CAST(Sub2Mark AS UNSIGNED)+CAST(Sub3Mark AS UNSIGNED))/3)>60 ORDER BY Total DESC LIMIT 3;
+*OUTPUT:*
++--------+--------+----------+----------+----------+-------+------------+
+| RollNo | Name   | Sub1Mark | Sub2Mark | Sub3Mark | Total | Percentage |
++--------+--------+----------+----------+----------+-------+------------+
+|     17 | Arjun  |       92 |       90 |       95 |   277 |      92.33 |
+|     11 | Yash   |       91 |       89 |       94 |   274 |      91.33 |
+|      5 | Rohan  |       88 |       92 |       89 |   269 |      89.67 |
++--------+--------+----------+----------+----------+-------+------------+
+
+*Question 2:*
+TOP THREE SUBJECT WISE
+CONDIIONS:
+->No subject is "A" (not absent)
+->No subject has marks < 33 (not fail)
+->Total % > 60%
+
+*Query 2:*
+SELECT * FROM (SELECT RollNo, Name, 'Sub1' AS Subject, CAST(Sub1Mark AS UNSIGNED) AS Marks, (CAST(Sub1Mark AS UNSIGNED)+CAST(Sub2Mark AS UNSIGNED)+CAST(Sub3Mark AS UNSIGNED)) AS Total, RANK() OVER (ORDER BY CAST(Sub1Mark AS UNSIGNED) DESC, (CAST(Sub1Mark AS UNSIGNED)+CAST(Sub2Mark AS UNSIGNED)+CAST(Sub3Mark AS UNSIGNED)) DESC) AS pos FROM Students WHERE Sub1Mark != 'A' AND CAST(Sub1Mark AS UNSIGNED) >= 33) AS s1 WHERE pos <= 3 UNION ALL SELECT * FROM (SELECT RollNo, Name, 'Sub2', CAST(Sub2Mark AS UNSIGNED), (CAST(Sub1Mark AS UNSIGNED)+CAST(Sub2Mark AS UNSIGNED)+CAST(Sub3Mark AS UNSIGNED)), RANK() OVER (ORDER BY CAST(Sub2Mark AS UNSIGNED) DESC, (CAST(Sub1Mark AS UNSIGNED)+CAST(Sub2Mark AS UNSIGNED)+CAST(Sub3Mark AS UNSIGNED)) DESC) FROM Students WHERE Sub2Mark != 'A' AND CAST(Sub2Mark AS UNSIGNED) >= 33) AS s2 WHERE pos <= 3 UNION ALL SELECT * FROM (SELECT RollNo, Name, 'Sub3', CAST(Sub3Mark AS UNSIGNED), (CAST(Sub1Mark AS UNSIGNED)+CAST(Sub2Mark AS UNSIGNED)+CAST(Sub3Mark AS UNSIGNED)), RANK() OVER (ORDER BY CAST(Sub3Mark AS UNSIGNED) DESC, (CAST(Sub1Mark AS UNSIGNED)+CAST(Sub2Mark AS UNSIGNED)+CAST(Sub3Mark AS UNSIGNED)) DESC) FROM Students WHERE Sub3Mark != 'A' AND CAST(Sub3Mark AS UNSIGNED) >= 33) AS s3 WHERE pos <= 3;
+*OUTPUT:*
++--------+---------+---------+-------+-------+-----+
+| RollNo | Name    | Subject | Marks | Total | pos |
++--------+---------+---------+-------+-------+-----+
+|     17 | Arjun   | Sub1    |    92 |   277 |   1 |
+|     11 | Yash    | Sub1    |    91 |   274 |   2 |
+|      5 | Rohan   | Sub1    |    88 |   269 |   3 |
+|     17 | Arjun   | Sub2    |    90 |   277 |   1 |
+|      5 | Rohan   | Sub2    |    92 |   269 |   2 |
+|     11 | Yash    | Sub2    |    89 |   274 |   3 |
+|     17 | Arjun   | Sub3    |    95 |   277 |   1 |
+|     11 | Yash    | Sub3    |    94 |   274 |   2 |
+|      5 | Rohan   | Sub3    |    89 |   269 |   3 |
++--------+---------+---------+-------+-------+-----+

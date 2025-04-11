@@ -1,0 +1,60 @@
+1. WHERE
+Purpose: Filters records based on a specified condition.
+Example:
+SELECT * FROM Students WHERE Age > 18;
+Output:
++----+--------+-----+
+| ID | Name   | Age |
++----+--------+-----+
+|  2 | Priya  |  19 |
+|  3 | Neha   |  20 |
++----+--------+-----+
+
+2. ORDER BY
+Purpose: Sorts the result set in ascending (ASC) or descending (DESC) order.
+Example:
+SELECT * FROM Students ORDER BY Age DESC;
+Output:
++----+--------+-----+
+| ID | Name   | Age |
++----+--------+-----+
+|  3 | Neha   |  20 |
+|  2 | Priya  |  19 |
+|  1 | Raj    |  18 |
++----+--------+-----+
+ 
+3. GROUP BY
+Purpose: Groups rows that have the same values in specified columns.
+Example:
+SELECT Age, COUNT(*) FROM Students GROUP BY Age;
+Output:
++-----+----------+
+| Age | COUNT(*) |
++-----+----------+
+|  18 |        1 |
+|  19 |        2 |
+|  20 |        1 |
++-----+----------+
+
+4. HAVING
+Purpose: Filters groups (like GROUP BY results), used after grouping.
+Example:
+SELECT Age, COUNT(*) FROM Students GROUP BY Age HAVING COUNT(*) > 1;
+Output:
++-----+----------+
+| Age | COUNT(*) |
++-----+----------+
+|  19 |        2 |
++-----+----------+
+
+5. LIMIT
+Purpose: Restricts the number of records returned by a query.
+Example:
+SELECT * FROM Students LIMIT 2;
+Output:
++----+--------+-----+
+| ID | Name   | Age |
++----+--------+-----+
+|  1 | Raj    |  18 |
+|  2 | Priya  |  19 |
++----+--------+-----+

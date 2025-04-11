@@ -1,0 +1,118 @@
+SQL JOINS
+Joins are used to combine rows from two or more tables based on a related column between them (usually a foreign key).
+
+-> Table students:-  
++----+--------+        
+| ID | Name   | 
++----+--------+
+| 1  | Raj    |
+| 2  | Simran |
+| 3  | Aman   |
++----+--------+
+->Table Courses
++-----------+-------------+
+| StudentID | CourseName  |
++-----------+-------------+
+| 1         | DBMS        |
+| 2         | OS          |
+| NULL      | CN          |
++-----------+-------------+
+
+1. INNER JOIN
+Purpose: Returns only the rows with matching values in both tables.
+Example:
+SELECT Students.ID, Students.Name, Courses.CourseName
+FROM Students
+INNER JOIN Courses ON Students.ID = Courses.StudentID;
+Output:
++----+--------+-------------+
+| ID | Name   | CourseName |
++----+--------+-------------+
+| 1  | Raj    | DBMS        |
+| 2  | Simran | OS          |
++----+--------+-------------+
+
+2. LEFT JOIN (or LEFT OUTER JOIN)
+Purpose: Returns all rows from the left table, and matched rows from the right table. If no match, NULLs are shown.
+Example:
+SELECT Students.ID, Students.Name, Courses.CourseName
+FROM Students
+LEFT JOIN Courses ON Students.ID = Courses.StudentID;
+Output:
++----+--------+-------------+
+| ID | Name   | CourseName  |
++----+--------+-------------+
+| 1  | Raj    | DBMS        |
+| 2  | Simran | OS          |
+| 3  | Aman   | NULL        |
++----+--------+-------------+
+
+3. RIGHT JOIN (or RIGHT OUTER JOIN)
+Purpose: Returns all rows from the right table, and matched rows from the left table.
+Example:
+SELECT Students.ID, Students.Name, Courses.CourseName
+FROM Students
+RIGHT JOIN Courses ON Students.ID = Courses.StudentID;
+Output:
++----+--------+-------------+
+| ID | Name   | CourseName |
++----+--------+-------------+
+| 1  | Raj    | DBMS        |
+| 2  | Simran | OS          |
+| NULL | NULL | CN          |
++----+--------+-------------+
+
+4. FULL JOIN (or FULL OUTER JOIN)
+Purpose: Returns all records when there is a match in either left or right table. Shows NULL where no match is found.
+ Example:
+SELECT Students.ID, Students.Name, Courses.CourseName
+FROM Students
+LEFT JOIN Courses ON Students.ID = Courses.StudentID
+UNION
+SELECT Students.ID, Students.Name, Courses.CourseName
+FROM Students
+RIGHT JOIN Courses ON Students.ID = Courses.StudentID;
+Output
++----+--------+-------------+
+| ID | Name   | CourseName |
++----+--------+-------------+
+| 1  | Raj    | DBMS        |
+| 2  | Simran | OS          |
+| 3  | Aman   | NULL        |
+| NULL | NULL | CN          |
++----+--------+-------------+
+
+5. CROSS JOIN
+Purpose: Returns the Cartesian product — every combination of rows from both tables.
+Example:
+SELECT Students.Name, Courses.CourseName
+FROM Students
+CROSS JOIN Courses;
+Output
++--------+-------------+
+| Name   | CourseName |
++--------+-------------+
+| Raj    | DBMS        |
+| Raj    | OS          |
+| Raj    | CN          |
+| Simran | DBMS        |
+| Simran | OS          |
+| Simran | CN          |
+| Aman   | DBMS        |
+| Aman   | OS          |
+| Aman   | CN          |
++--------+-------------+
+
+6. SELF JOIN
+Purpose: A SELF JOIN is a regular join where a table is joined with itself. It helps to compare rows in the same table — useful for things like showing employee-manager hierarchies.
+SELECT A.Name AS Employee, B.Name AS Manager
+FROM Employees A
+JOIN Employees B ON A.ManagerID = B.ID;
+Output:
++----------+---------+
+| Employee | Manager |
++----------+---------+
+| Simran   | Raj     |
+| Aman     | Raj     |
+| Pooja    | Simran  |
++----------+---------+

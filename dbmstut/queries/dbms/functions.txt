@@ -1,0 +1,151 @@
+->Aggregate Functions
+Aggregate functions perform calculations on multiple rows of a table's column and return a single value. These are mainly used with GROUP BY.
+
+1. COUNT()
+Purpose: Returns the number of rows.
+Example:
+SELECT COUNT(*) FROM Students;
+Output:
++----------+
+| COUNT(*) |
++----------+
+|        5 |
++----------+
+
+2. SUM()
+Purpose: Returns the total sum of a numeric column.
+Example:
+SELECT SUM(Age) FROM Students;
+Output:
++-----------+
+| SUM(Age)  |
++-----------+
+|       97  |
++-----------+
+
+3. AVG()
+Purpose: Returns the average of a numeric column.
+Example:
+SELECT AVG(Age) FROM Students;
+Output:
++-----------+
+| AVG(Age)  |
++-----------+
+|     19.4  |
++-----------+
+
+4. MIN()
+Purpose: Returns the minimum value in a column.
+Example:
+SELECT MIN(Age) FROM Students;
+Output:
++-----------+
+| MIN(Age)  |
++-----------+
+|        18 |
++-----------+
+
+5. MAX()
+Purpose: Returns the maximum value in a column.
+Example:
+SELECT MAX(Age) FROM Students;
+Output:
++-----------+
+| MAX(Age)  |
++-----------+
+|        21 |
++-----------+
+
+->Character Functions
+These functions work on string data types to manipulate or extract string values.
+
+1. LENGTH()
+Purpose: Returns the number of characters in a string.
+Example:
+SELECT LENGTH('Database');
+Output:
++------------------+
+| LENGTH('Database') |
++------------------+
+|                8 |
++------------------+
+
+2. UPPER() / UCASE()
+Purpose: Converts a string to uppercase.
+Example:
+SELECT UPPER('sql');
+Output:
++---------------+
+| UPPER('sql')  |
++---------------+
+| SQL           |
++---------------+
+
+3. LOWER() / LCASE()
+Purpose: Converts a string to lowercase.
+Example:
+SELECT LOWER('SQL');
+Output:
++---------------+
+| LOWER('SQL')  |
++---------------+
+| sql           |
++---------------+
+
+->Date Functions
+Date functions are used to manipulate and retrieve date and time values.
+
+1. NOW()
+Purpose: Returns the current system date and time.
+Example:
+SELECT NOW();
+Output:
++---------------------+
+| NOW()               |
++---------------------+
+| 2025-04-10 14:45:00 |
++---------------------+
+
+2. CURDATE() / CURRENT_DATE
+Purpose: Returns the current date.
+Example:
+SELECT CURDATE();
+Output:
++------------+
+| CURDATE()  |
++------------+
+| 2025-04-10 |
++------------+
+
+3. CURTIME() / CURRENT_TIME
+Purpose: Returns the current time.
+Example:
+SELECT CURTIME();
+Output:
++----------+
+| CURTIME()|
++----------+
+| 14:45:00 |
++----------+
+
+4. DAY(), MONTH(), YEAR()
+Purpose: Extracts specific parts of a date.
+Example:
+SELECT DAY('2025-04-10'), MONTH('2025-04-10'), YEAR('2025-04-10');
+Output:
++-------------------------+
+| DAY | MONTH | YEAR     |
++-------------------------+
+|  10 |    4  | 2025     |
++-------------------------+
+
+5. DATEDIFF()
+Purpose: Returns the number of days between two dates.
+Example:
+SELECT DATEDIFF('2025-04-15', '2025-04-10');
+Output:
++-------------------------------+
+| DATEDIFF('2025-04-15','2025-04-10') |
++-------------------------------+
+| 5                             |
++-------------------------------+

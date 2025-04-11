@@ -1,0 +1,47 @@
+ What is TCL?
+TCL (Transaction Control Language) commands manage transactions in a database.
+A transaction is a group of operations that are executed as a single unit to ensure data consistency. TCL commands help commit, rollback, or temporarily save data during a transaction.
+
+1. COMMIT
+Purpose: To permanently save all changes made during the current transaction.
+Example:
+INSERT INTO Students VALUES (3, 'Neha', 22, 'neha@mail.com');
+COMMIT;
+Output:
+> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+> INSERT INTO Students VALUES (3, 'Neha', 22, 'neha@mail.com');
+Query OK, 1 row affected (0.01 sec)
+> COMMIT;
+Query OK, 0 rows affected (0.00 sec)
+> SELECT * FROM Students;
++----+--------+-----+------------------+
+| ID | Name   | Age | Email            |
++----+--------+-----+------------------+
+|  1 | Raj    |  20 | raj37@gmail.com  |
+|  2 | Priya  |  21 | priya@mail.com   |
+|  3 | Neha   |  22 | neha@mail.com    |
++----+--------+-----+------------------+
+3 rows in set (0.00 sec)
+
+2. ROLLBACK
+Purpose: To undo changes made in the current transaction (before COMMIT).
+Example:
+DELETE FROM Students WHERE ID = 2;
+ROLLBACK;
+Output:
+> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+> DELETE FROM Students WHERE ID = 2;
+Query OK, 1 row affected (0.01 sec)
+> ROLLBACK;
+Query OK, 0 rows affected (0.00 sec)
+> SELECT * FROM Students;
++----+--------+-----+------------------+
+| ID | Name   | Age | Email            |
++----+--------+-----+------------------+
+|  1 | Raj    |  20 | raj37@gmail.com  |
+|  2 | Priya  |  21 | priya@mail.com   |
+|  3 | Neha   |  22 | neha@mail.com    |
++----+--------+-----+------------------+
+3 rows in set (0.00 sec)

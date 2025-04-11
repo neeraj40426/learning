@@ -1,0 +1,129 @@
+*{
+    text-decoration: none;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+.nav{
+    background-color: rgba(34, 178, 230, 0.915);
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.navdiv{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo{
+    font-size: 30px;
+    font-weight: 300;
+    transition: font-size 0.3s;
+   
+}
+.logo:hover{
+    font-size: 35px;
+}
+.opt{
+a{font-size: 20px;
+    margin-right: 15px;
+    color: rgb(90, 90, 90);
+    transition: font-size 0.3s;
+
+}
+a:hover{
+font-size: 25px;    
+} 
+}
+.frame{
+    iframe{
+        width: 100%;
+        height: 520px;
+        border-radius: 10px;
+        flex:1;
+    }
+}
+.imgcen{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.info{
+    padding-top:200px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-image: url(images/1.webp);
+    color: rgb(255, 255, 255);
+    text-shadow: 
+            -1px -1px 0 black,
+             1px -1px 0 black,
+            -1px  1px 0 black,
+             1px  1px 0 black;
+    font-size: 42px;
+    padding-left: 20px;
+    padding-bottom: 210px;
+}
+.info2{
+    color: rgb(255, 255, 255);
+    text-shadow: 
+            -1px -1px 0 black,
+             1px -1px 0 black,
+            -1px  1px 0 black,
+             1px  1px 0 black;
+    font-size: 20px;
+}
+.end{
+    display: flex;
+    justify-content: center;
+    background-color: grey;
+  padding: 20px;
+}
+.wrap {
+    display: flex;  
+    height: 100%;
+    padding: 30px;
+}.box{
+    height: 100vh;
+    width: 26%;
+    border-radius: 20px;
+}
+.right-box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right {
+    width: 80%;
+    height: 100%;
+    border-radius: 20px;
+}
+.listbu{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+a{ font-size: 25px;
+    border-radius: 20px;
+    transition: font-size 0.3s;
+    background-color: rgb(78, 152, 255) ;
+    color: rgb(255, 255, 255);
+    padding: 15px;
+}
+a:hover{
+    font-size: 35px;
+    color: rgb(255, 255, 255) ;
+    background-color:  rgb(114, 114, 114); 
+}
+}

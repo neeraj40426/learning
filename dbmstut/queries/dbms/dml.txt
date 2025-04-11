@@ -1,0 +1,61 @@
+What is DML?
+DML (Data Manipulation Language) includes SQL commands used to retrieve, insert, update, and delete data in a database.
+**DML commands manipulate data inside database tables — not the structure of the tables.
+
+1. INSERT
+Purpose: To add new records (rows) into a table.
+Example:
+INSERT INTO Students (ID, Name, Age, Email)
+VALUES (1, 'Raj', 19, 'raj37@gmail.com');
+Output:
+> SELECT * FROM Students;
+Empty set (0.00 sec)
+> INSERT INTO Students (ID, Name, Age, Email)
+  VALUES (1, 'Raj', 19, 'raj37@gmail.com');
+Query OK, 1 row affected (0.02 sec)
+> SELECT * FROM Students;
++----+------+-----+-------------------+
+| ID | Name | Age | Email             |
++----+------+-----+-------------------+
+|  1 | Raj  |  19 | raj37@gmail.com   |
++----+------+-----+-------------------+
+1 row in set (0.00 sec)
+
+
+2. UPDATE
+Purpose: To modify existing records in a table.
+Example:
+UPDATE Students SET Age = 20 WHERE ID = 1;
+Output:
+> SELECT * FROM Students;
++----+------+-----+-------------------+
+| ID | Name | Age | Email             |
++----+------+-----+-------------------+
+|  1 | Raj  |  19 | raj37@gmail.com   |
++----+------+-----+-------------------+
+> UPDATE Students SET Age = 20 WHERE ID = 1;
+Query OK, 1 row affected (0.01 sec)
+> SELECT * FROM Students;
++----+------+-----+-------------------+
+| ID | Name | Age | Email             |
++----+------+-----+-------------------+
+|  1 | Raj  |  20 | raj37@gmail.com   |
++----+------+-----+-------------------+
+1 row in set (0.00 sec)
+
+3. DELETE
+Purpose: To remove specific rows from a table.
+Example:
+DELETE FROM Students
+WHERE ID = 1;
+Output:
+> SELECT * FROM Students;
++----+------+-----+-------------------+
+| ID | Name | Age | Email             |
++----+------+-----+-------------------+
+|  1 | Raj  |  20 | raj37@gmail.com   |
++----+------+-----+-------------------+
+> DELETE FROM Students WHERE ID = 1;
+Query OK, 1 row affected (0.01 sec)
+> SELECT * FROM Students;
+Empty set (0.00 sec)

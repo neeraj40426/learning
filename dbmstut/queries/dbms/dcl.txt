@@ -1,0 +1,35 @@
+What is DCL?
+DCL (Data Control Language) includes commands used to grant and revoke privileges or permissions on database objects like tables, views, and procedures.
+These commands control who can access or manipulate database data or structures.
+
+1. GRANT
+Purpose: To give specific privileges to a user (or role) to perform actions on database objects.
+Example:
+GRANT SELECT, INSERT ON Students TO 'raj'@'localhost';
+Output:
+> GRANT SELECT, INSERT ON Students TO 'raj'@'localhost';
+Query OK, 0 rows affected (0.01 sec)
+> SHOW GRANTS FOR 'raj'@'localhost';
++----------------------------------------------------------+
+| Grants for raj@localhost                                 |
++----------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'raj'@'localhost'                  |
+| GRANT SELECT, INSERT ON `mydb`.`students` TO 'raj'@'localhost' |
++----------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+2. REVOKE
+Purpose: To remove previously granted privileges from a user or role.
+Example:
+REVOKE INSERT ON Students FROM 'raj'@'localhost';
+Output:
+> REVOKE INSERT ON Students FROM 'raj'@'localhost';
+Query OK, 0 rows affected (0.01 sec)
+> SHOW GRANTS FOR 'raj'@'localhost';
++----------------------------------------------------------+
+| Grants for raj@localhost                                 |
++----------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'raj'@'localhost'                  |
+| GRANT SELECT ON `mydb`.`students` TO 'raj'@'localhost'   |
++----------------------------------------------------------+
+2 rows in set (0.00 sec)

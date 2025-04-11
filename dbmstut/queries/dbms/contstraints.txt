@@ -1,0 +1,89 @@
+What are Constraints?
+Constraints are rules applied to table columns to enforce data integrity, accuracy, and reliability in the database. They prevent invalid data from being stored in the table.
+
+1. NOT NULL
+Purpose: Ensures that a column cannot have a NULL value.
+Example:
+CREATE TABLE Students (
+  ID INT NOT NULL,
+  Name VARCHAR(50) NOT NULL
+);
+Output:
+> INSERT INTO Students (ID) VALUES (1);
+ERROR 1364 (HY000): Field 'Name' doesn't have a default value
+> INSERT INTO Students (ID, Name) VALUES (1, 'Raj');
+Query OK, 1 row affected (0.01 sec)
+
+2. UNIQUE
+Purpose: Ensures that all values in a column are distinct (no duplicates).
+Example:
+CREATE TABLE Users (
+  Email VARCHAR(100) UNIQUE
+);
+Output:
+> INSERT INTO Users VALUES ('raj@gmail.com');
+Query OK, 1 row affected (0.01 sec)
+> INSERT INTO Users VALUES ('raj@gmail.com');
+ERROR 1062 (23000): Duplicate entry 'raj@gmail.com' for key 'users.Email'
+
+3. PRIMARY KEY
+Purpose: Uniquely identifies each record in a table. Combines NOT NULL and UNIQUE.
+Example:
+CREATE TABLE Students (
+  ID INT PRIMARY KEY,
+  Name VARCHAR(50)
+);
+Output:
+> INSERT INTO Students VALUES (1, 'Raj');
+Query OK, 1 row affected (0.01 sec)
+> INSERT INTO Students VALUES (1, 'Priya');
+ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
+
+4. FOREIGN KEY
+Purpose: Links a column to the primary key of another table (ensures referential integrity).
+Example:
+CREATE TABLE Departments (
+  DeptID INT PRIMARY KEY,
+  DeptName VARCHAR(50)
+)
+CREATE TABLE Employees (
+  EmpID INT PRIMARY KEY,
+  DeptID INT,
+  FOREIGN KEY (DeptID) REFERENCES Departments(DeptID)
+);
+Output:
+> INSERT INTO Employees VALUES (1, 10);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails
+> INSERT INTO Departments VALUES (10, 'HR');
+> INSERT INTO Employees VALUES (1, 10);
+Query OK, 1 row affected (0.01 sec)
+
+5. CHECK
+Purpose: Ensures that all values in a column satisfy a specific condition.
+Example:
+CREATE TABLE Students (
+  ID INT,
+  Age INT CHECK (Age >= 18)
+);
+Output:
+> INSERT INTO Students VALUES (1, 17);
+ERROR 3819 (HY000): Check constraint 'students_chk_1' is violated.
+> INSERT INTO Students VALUES (2, 20);
+Query OK, 1 row affected (0.01 sec)
+
+6. DEFAULT
+Purpose: Provides a default value for a column if none is specified.
+Example:
+CREATE TABLE Students (
+  ID INT,
+  City VARCHAR(50) DEFAULT 'Unknown'
+);
+Output:
+> INSERT INTO Students (ID) VALUES (1);
+Query OK, 1 row affected (0.01 sec)
+> SELECT * FROM Students;
++----+---------+
+| ID | City    |
++----+---------+
+|  1 | Unknown |
++----+---------+
